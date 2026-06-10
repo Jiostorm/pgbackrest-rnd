@@ -16,10 +16,14 @@ build:
 
 up:
 	@docker compose up primary replica -d
+xup: up ssh-sock
+	@echo
 down:
 	@docker compose down primary replica
 
 up-ctl:
 	@docker compose up primary-ctl replica-ctl -d
+xup-ctl: up-ctl ssh-sock-ctl
+	@echo
 down-ctl:
 	@docker compose down primary-ctl replica-ctl
