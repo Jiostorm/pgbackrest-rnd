@@ -1,0 +1,98 @@
+networks:
+  pgsql-subnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.1.0/24
+
+services:
+  primary:
+    image: pg-pitr:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - pgsql-subnet
+    ports:
+      - 2222:22
+      - 5432:5432
+    volumes:
+      - ./primary/.ssh:/var/lib/postgresql/.ssh
+      - ./primary/data:/var/lib/postgresql/data
+      - ./primary/pgbackrest:/etc/pgbackrest
+      - ./primary/.ssh:/root/.ssh
+      - ./dumps/:/dumps
+      - ./scripts:/scripts
+  replica:
+    image: pg-pitr:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - pgsql-subnet
+    ports:
+      - 2223:22
+      - 5433:5432
+    volumes:
+      - ./replica/.ssh:/var/lib/postgresql/.ssh
+      - ./replica/data:/var/lib/postgresql/data
+      - ./replica/pgbackrest:/etc/pgbackrest
+      - ./replica/.ssh:/root/.ssh
+      - ./scripts:/scripts
+  primary-ctl:
+    image: pg-pitr:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - pgsql-subnet
+    ports:
+      - 2224:22
+      - 5434:5432
+    volumes:
+      - ./primary/.ssh:/var/lib/postgresql/.ssh
+      - ./primary/data:/var/lib/postgresql/data
+      - ./primary/pgbackrest:/etc/pgbackrest
+      - ./primary/.ssh:/root/.ssh
+      - ./dumps/:/dumps
+      - ./scripts:/scripts
+    command:
+      - sh
+      - -c
+      - /usr/sbin/sshd -D & sleep 1 && tail -f /dev/null
+  replica-ctl:
+    image: pg-pitr:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - pgsql-subnet
+    ports:
+      - 2225:22
+      - 5435:5432
+    volumes:
+      - ./replica/.ssh:/var/lib/postgresql/.ssh
+      - ./replica/data:/var/lib/postgresql/data
+      - ./replica/pgbackrest:/etc/pgbackrest
+      - ./replica/.ssh:/root/.ssh
+      - ./scripts:/scripts
+    command:
+      - sh
+      - -c
+      - /usr/sbin/sshd -D & sleep 1 && tail -f /dev/null
