@@ -21,7 +21,6 @@ services:
       - 2222:22
       - 5432:5432
     volumes:
-      - ./primary/.ssh:/var/lib/postgresql/.ssh
       - ./primary/data:/var/lib/postgresql/data
       - ./primary/pgbackrest:/etc/pgbackrest
       - ./primary/.ssh:/root/.ssh
@@ -42,7 +41,6 @@ services:
       - 2223:22
       - 5433:5432
     volumes:
-      - ./replica/.ssh:/var/lib/postgresql/.ssh
       - ./replica/data:/var/lib/postgresql/data
       - ./replica/pgbackrest:/etc/pgbackrest
       - ./replica/.ssh:/root/.ssh
@@ -62,7 +60,6 @@ services:
       - 2224:22
       - 5434:5432
     volumes:
-      - ./primary/.ssh:/var/lib/postgresql/.ssh
       - ./primary/data:/var/lib/postgresql/data
       - ./primary/pgbackrest:/etc/pgbackrest
       - ./primary/.ssh:/root/.ssh
@@ -87,7 +84,6 @@ services:
       - 2225:22
       - 5435:5432
     volumes:
-      - ./replica/.ssh:/var/lib/postgresql/.ssh
       - ./replica/data:/var/lib/postgresql/data
       - ./replica/pgbackrest:/etc/pgbackrest
       - ./replica/.ssh:/root/.ssh
