@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+pg_basebackup -W -R -D "$PGDATA" -S "$REPL_SLOT" -h primary -U "$REPL_USER" -X stream -vP
+chown postgres:postgres "$PGDATA"
