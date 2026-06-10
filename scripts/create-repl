@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+psql <<-HERE
+  SELECT pg_create_physical_replication_slot('$REPL_SLOT');
+HERE
