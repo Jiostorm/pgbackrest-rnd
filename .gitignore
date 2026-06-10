@@ -2,6 +2,8 @@
 
 **/.ssh/
 
+dumps/*
+
 primary/data/*
 !primary/data/postgresql.conf
 !primary/data/pg_hba.conf
