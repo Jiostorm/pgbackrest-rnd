@@ -13,6 +13,68 @@ This R&D evaluates the use of `pgBackRest`, an open-source backup and restore to
 - [Object Storage (MinIO)](github.com/minio/docs)
 - [pgBackRest](https://pgbackrest.org/)
 
+### Configurations
+#### _PostgreSQL_
+```conf
+# pg_hba.conf
+host    all         all         <source-cidr> trust
+host    replication replicator  <source-cidr> trust
+```
+
+```conf
+# postgresql.conf
+
+## base
+listen_address = '*'
+max_connections = 100
+
+## replication
+wal_level = replica
+max_wal_size = 1GB
+min_wal_size = 80MB
+
+## archiving
+archive_mode = on
+archive_command = 'pgbackrest --stanza=<stanza-name> archive-push %p'
+```
+
+#### _pgBackRest_
+```conf
+[global]
+repo1-path=/example/
+repo1-bundle=y
+repo1-retention-full=2
+
+repo1-type=s3
+repo1-s3-bucket=backups
+repo1-s3-endpoint=$MINIO_ENDPOINT_URL
+repo1-s3-region=us-east-1
+
+repo1-s3-key=$MINIO_ACCESS_KEY
+repo1-s3-key-secret=$MINIO_SECRET_KEY
+
+repo1-s3-uri-style=path
+repo1-s3-verify-tls=y
+
+log-level-console=detail
+log-level-file=debug
+compress-level=6
+delta=y
+start-fast=y
+
+[global:archive-push]
+compress-level=6
+
+[main]
+pg1-user=root
+pg1-path=/var/lib/postgresql/data
+
+pg2-user=postgres
+pg2-host-user=root
+pg2-host=replica
+pg2-path=/var/lib/postgresql/data
+```
+
 ### Commands
 #### Base
 ```sh
