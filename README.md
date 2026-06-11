@@ -231,4 +231,8 @@ pgbackrest \
 ## **Architecture**
 ![PostgreSQL - pgBackRest - MinIO Infrastructure Design](./assets/architecture.svg)
 
-## References 
+## **References**
+- [pgBackRest Repository](https://github.com/pgbackrest/pgbackrest)
+- [pgBackRest Documentation](https://pgbackrest.org/user-guide.html)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/17/index.html)
+- [MinIO Documentation](github.com/minio/docs)
