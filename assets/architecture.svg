@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="867pt" height="351pt" viewBox="0.00 0.00 867.00 350.80">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 346.8)">
+<title>pgsql.pgbackrest</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-346.8 863,-346.8 863,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_pgsql</title>
+<polygon fill="none" stroke="black" points="8,-8 8,-334.8 192,-334.8 192,-8 8,-8"/>
+<text text-anchor="middle" x="100" y="-318.2" font-family="Times,serif" font-size="14.00">PostgreSQL Instances</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_pgbackrest</title>
+<polygon fill="none" stroke="black" points="268,-224 268,-334.8 402,-334.8 402,-224 268,-224"/>
+<text text-anchor="middle" x="335" y="-318.2" font-family="Times,serif" font-size="14.00">pgBackRest Channel</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_object.store</title>
+<polygon fill="none" stroke="black" points="477,-116 477,-334.8 851,-334.8 851,-116 477,-116"/>
+<text text-anchor="middle" x="664" y="-318.2" font-family="Times,serif" font-size="14.00">Object Store Channel</text>
+</g>
+<!-- pgsql.standby -->
+<g id="node1" class="node">
+<title>pgsql.standby</title>
+<polygon fill="none" stroke="black" points="166.92,-285 33.08,-285 33.08,-249 166.92,-249 166.92,-285"/>
+<text text-anchor="middle" x="100" y="-262.8" font-family="Times,serif" font-size="14.00">PostgreSQL Standby</text>
+</g>
+<!-- pgsql.primary -->
+<g id="node2" class="node">
+<title>pgsql.primary</title>
+<polygon fill="none" stroke="black" points="166.53,-177 33.47,-177 33.47,-141 166.53,-141 166.53,-177"/>
+<text text-anchor="middle" x="100" y="-154.8" font-family="Times,serif" font-size="14.00">PostgreSQL Primary</text>
+</g>
+<!-- pgsql.standby&#45;&gt;pgsql.primary -->
+<g id="edge6" class="edge">
+<title>pgsql.standby-&gt;pgsql.primary</title>
+<path fill="none" stroke="black" d="M77.82,-248.68C77.82,-248.68 77.82,-188.92 77.82,-188.92"/>
+<polygon fill="black" stroke="black" points="81.32,-188.92 77.82,-178.92 74.32,-188.92 81.32,-188.92"/>
+</g>
+<!-- pgbackrest.init -->
+<g id="node4" class="node">
+<title>pgbackrest.init</title>
+<polygon fill="none" stroke="black" points="376.83,-285 293.17,-285 293.17,-249 376.83,-249 376.83,-285"/>
+<text text-anchor="middle" x="335" y="-262.8" font-family="Times,serif" font-size="14.00">pgBackRest</text>
+</g>
+<!-- pgsql.standby&#45;&gt;pgbackrest.init -->
+<g id="edge7" class="edge">
+<title>pgsql.standby-&gt;pgbackrest.init</title>
+<path fill="none" stroke="black" d="M167.34,-261C167.34,-261 281.28,-261 281.28,-261"/>
+<polygon fill="black" stroke="black" points="281.28,-264.5 291.28,-261 281.28,-257.5 281.28,-264.5"/>
+</g>
+<!-- pgsql.primary&#45;&gt;pgsql.standby -->
+<g id="edge5" class="edge">
+<title>pgsql.primary-&gt;pgsql.standby</title>
+<path fill="none" stroke="black" d="M122.18,-177.32C122.18,-177.32 122.18,-237.08 122.18,-237.08"/>
+<polygon fill="black" stroke="black" points="118.68,-237.08 122.18,-247.08 125.68,-237.08 118.68,-237.08"/>
+</g>
+<!-- pgsql.replica -->
+<g id="node3" class="node">
+<title>pgsql.replica</title>
+<polygon fill="none" stroke="black" points="165.35,-69 34.65,-69 34.65,-33 165.35,-33 165.35,-69"/>
+<text text-anchor="middle" x="100" y="-46.8" font-family="Times,serif" font-size="14.00">PostgreSQL Replica</text>
+</g>
+<!-- pgsql.primary&#45;&gt;pgsql.replica -->
+<g id="edge4" class="edge">
+<title>pgsql.primary-&gt;pgsql.replica</title>
+<path fill="none" stroke="black" d="M121.78,-140.68C121.78,-140.68 121.78,-80.92 121.78,-80.92"/>
+<polygon fill="black" stroke="black" points="125.28,-80.92 121.78,-70.92 118.28,-80.92 125.28,-80.92"/>
+</g>
+<!-- pgsql.primary&#45;&gt;pgbackrest.init -->
+<!-- pgsql.replica&#45;&gt;pgsql.primary -->
+<g id="edge3" class="edge">
+<title>pgsql.replica-&gt;pgsql.primary</title>
+<path fill="none" stroke="black" d="M78.22,-69.32C78.22,-69.32 78.22,-129.08 78.22,-129.08"/>
+<polygon fill="black" stroke="black" points="74.72,-129.08 78.22,-139.08 81.72,-129.08 74.72,-129.08"/>
+</g>
+<!-- pgbackrest.init&#45;&gt;pgsql.standby -->
+<g id="edge8" class="edge">
+<title>pgbackrest.init-&gt;pgsql.standby</title>
+<path fill="none" stroke="black" d="M292.72,-273C292.72,-273 178.8,-273 178.8,-273"/>
+<polygon fill="black" stroke="black" points="178.8,-269.5 168.8,-273 178.8,-276.5 178.8,-269.5"/>
+</g>
+<!-- objstr.minio -->
+<g id="node5" class="node">
+<title>objstr.minio</title>
+<polygon fill="none" stroke="black" points="599.63,-285 502.37,-285 502.37,-249 599.63,-249 599.63,-285"/>
+<text text-anchor="middle" x="551" y="-262.8" font-family="Times,serif" font-size="14.00">MinIO Bucket</text>
+</g>
+<!-- pgbackrest.init&#45;&gt;objstr.minio -->
+<!-- pgbackrest.init&#45;&gt;objstr.minio -->
+<g id="edge9" class="edge">
+<title>pgbackrest.init-&gt;objstr.minio</title>
+<path fill="none" stroke="black" d="M377.16,-276C377.16,-276 490.64,-276 490.64,-276"/>
+<polygon fill="black" stroke="black" points="490.64,-279.5 500.64,-276 490.64,-272.5 490.64,-279.5"/>
+</g>
+<!-- objstr.minio&#45;&gt;pgbackrest.init -->
+<g id="edge10" class="edge">
+<title>objstr.minio-&gt;pgbackrest.init</title>
+<path fill="none" stroke="black" d="M501.99,-258C501.99,-258 388.77,-258 388.77,-258"/>
+<polygon fill="black" stroke="black" points="388.77,-254.5 378.77,-258 388.77,-261.5 388.77,-254.5"/>
+</g>
+<!-- objstr.minio.backup -->
+<g id="node6" class="node">
+<title>objstr.minio.backup</title>
+<polygon fill="none" stroke="black" points="826.19,-285 725.81,-285 725.81,-249 826.19,-249 826.19,-285"/>
+<text text-anchor="middle" x="776" y="-262.8" font-family="Times,serif" font-size="14.00">MinIO Backup</text>
+</g>
+<!-- objstr.minio&#45;&gt;objstr.minio.backup -->
+<g id="edge11" class="edge">
+<title>objstr.minio-&gt;objstr.minio.backup</title>
+<path fill="none" stroke="black" d="M600.1,-267C600.1,-267 713.93,-267 713.93,-267"/>
+<polygon fill="black" stroke="black" points="713.93,-270.5 723.93,-267 713.93,-263.5 713.93,-270.5"/>
+</g>
+<!-- objstr.minio.archive -->
+<g id="node7" class="node">
+<title>objstr.minio.archive</title>
+<polygon fill="none" stroke="black" points="604.35,-177 501.65,-177 501.65,-141 604.35,-141 604.35,-177"/>
+<text text-anchor="middle" x="553" y="-154.8" font-family="Times,serif" font-size="14.00">MinIO Archive</text>
+</g>
+<!-- objstr.minio&#45;&gt;objstr.minio.archive -->
+<g id="edge12" class="edge">
+<title>objstr.minio-&gt;objstr.minio.archive</title>
+<path fill="none" stroke="black" d="M551,-248.68C551,-248.68 551,-188.92 551,-188.92"/>
+<polygon fill="black" stroke="black" points="554.5,-188.92 551,-178.92 547.5,-188.92 554.5,-188.92"/>
+</g>
+</g>
+</svg>

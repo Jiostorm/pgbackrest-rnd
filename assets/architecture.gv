@@ -1,0 +1,53 @@
+digraph "pgsql.pgbackrest" {
+  rankdir = "TB";
+  splines = "ortho";
+  newrank = true;
+
+  graph [ranksep = 1.0, nodesep = 1.75];
+  node[shape = "rect"];
+
+  subgraph "cluster_pgsql" {
+    label = "PostgreSQL Instances";
+    margin = 25;
+
+    "pgsql.standby" [label = "PostgreSQL Standby"];
+    "pgsql.primary" [label = "PostgreSQL Primary"];
+    "pgsql.replica" [label = "PostgreSQL Replica"];
+  }
+
+  subgraph "cluster_pgbackrest" {
+    label = "pgBackRest Channel";
+    margin = 25;
+
+    "pgbackrest.init" [label = "pgBackRest"];
+  }
+
+  subgraph "cluster_object.store" {
+    label = "Object Store Channel";
+    margin = 25;
+
+    "objstr.minio" [label = "MinIO Bucket"];
+    "objstr.minio.backup" [label = "MinIO Backup"];
+    "objstr.minio.archive" [label = "MinIO Archive"];
+  }
+
+  { rank=same; ranksep=20; "pgsql.standby"; "pgbackrest.init"; "objstr.minio"; "objstr.minio.backup"; }
+
+  // Alignment
+  "pgsql.primary" -> "pgbackrest.init" [style = "invis"];
+  "pgbackrest.init" -> "objstr.minio" [style = "invis"];
+
+  "pgsql.replica" -> "pgsql.primary";
+  "pgsql.primary" -> "pgsql.replica";
+  "pgsql.primary" -> "pgsql.standby";
+  "pgsql.standby" -> "pgsql.primary";
+
+  "pgsql.standby" -> "pgbackrest.init";
+  "pgbackrest.init" -> "pgsql.standby";
+
+  "pgbackrest.init" -> "objstr.minio";
+  "objstr.minio" -> "pgbackrest.init";
+
+  "objstr.minio" -> "objstr.minio.backup";
+  "objstr.minio" -> "objstr.minio.archive";
+}
