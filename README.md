@@ -58,7 +58,6 @@ repo1-bundle=y
 
 backup-standby=y
 start-fast=y
-stop-auto=y
 resume=y
 delta=y
 
