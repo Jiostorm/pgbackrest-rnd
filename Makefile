@@ -4,8 +4,8 @@ socks="2222\n2223"
 socks-ctl="2224\n2225"
 
 minio-sock:
-	@ssh -fN -L 9000:localhost:9000 dockerized.staging.internal
-	@ssh -fN -L 9001:localhost:9001 dockerized.staging.internal
+	@ssh -fN -L 9000:localhost:9000 $(MINIO_HOST)
+	@ssh -fN -L 9001:localhost:9001 $(MINIO_HOST)
 ssh-sock:
 	@echo $(socks) | xargs -I{} ssh -fN -R 9000:localhost:9000 root@localhost -p {}
 ssh-sock-ctl:
