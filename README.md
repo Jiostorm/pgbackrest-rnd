@@ -41,38 +41,49 @@ archive_command = 'pgbackrest --stanza=<stanza-name> archive-push %p'
 #### _pgBackRest_
 ```conf
 [global]
-repo1-path=/example/
-repo1-bundle=y
-repo1-retention-full=2
-
 repo1-type=s3
 repo1-s3-bucket=backups
 repo1-s3-endpoint=$MINIO_ENDPOINT_URL
 repo1-s3-region=us-east-1
+repo1-s3-uri-style=path
+repo1-s3-verify-tls=y
 
 repo1-s3-key=$MINIO_ACCESS_KEY
 repo1-s3-key-secret=$MINIO_SECRET_KEY
 
-repo1-s3-uri-style=path
-repo1-s3-verify-tls=y
+repo1-path=/example/
+repo1-retention-full=2
+repo1-bundle=y
 
-log-level-console=detail
-log-level-file=debug
-compress-level=6
-delta=y
+
+backup-standby=y
 start-fast=y
+stop-auto=y
+resume=y
+delta=y
+
+compress-level=6
+archive-async=y
+spool-path=/var/spool/pgbackrest
+
+log-level-console=info
+log-level-file=detail
+log-subprocess=y
+
+[main]
+pg1-path=/var/lib/postgresql/data
+pg1-port=5432
+pg1-user=root
+
+pg2-host=replica
+pg2-host-user=root
+pg2-path=/var/lib/postgresql/data
+pg2-port=5432
+pg2-user=postgres
 
 [global:archive-push]
 compress-level=6
 
-[main]
-pg1-user=root
-pg1-path=/var/lib/postgresql/data
-
-pg2-user=postgres
-pg2-host-user=root
-pg2-host=replica
-pg2-path=/var/lib/postgresql/data
 ```
 
 ### Commands
