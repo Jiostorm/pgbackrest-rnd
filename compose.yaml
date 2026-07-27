@@ -26,7 +26,7 @@ services:
       - ./primary/.ssh:/root/.ssh
       - ./dumps/:/dumps
       - ./scripts:/scripts
-  replica:
+  standby:
     image: pg-pitr:latest
     restart: always
     environment:
@@ -41,9 +41,9 @@ services:
       - 2223:22
       - 5433:5432
     volumes:
-      - ./replica/data:/var/lib/postgresql/data
-      - ./replica/pgbackrest:/etc/pgbackrest
-      - ./replica/.ssh:/root/.ssh
+      - ./standby/data:/var/lib/postgresql/data
+      - ./standby/pgbackrest:/etc/pgbackrest
+      - ./standby/.ssh:/root/.ssh
       - ./scripts:/scripts
   primary-ctl:
     image: pg-pitr:latest
@@ -69,7 +69,7 @@ services:
       - sh
       - -c
       - /usr/sbin/sshd -D & sleep 1 && tail -f /dev/null
-  replica-ctl:
+  standby-ctl:
     image: pg-pitr:latest
     restart: always
     environment:
@@ -84,9 +84,9 @@ services:
       - 2225:22
       - 5435:5432
     volumes:
-      - ./replica/data:/var/lib/postgresql/data
-      - ./replica/pgbackrest:/etc/pgbackrest
-      - ./replica/.ssh:/root/.ssh
+      - ./standby/data:/var/lib/postgresql/data
+      - ./standby/pgbackrest:/etc/pgbackrest
+      - ./standby/.ssh:/root/.ssh
       - ./scripts:/scripts
     command:
       - sh

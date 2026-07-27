@@ -74,7 +74,7 @@ pg1-path=/var/lib/postgresql/data
 pg1-port=5432
 pg1-user=root
 
-pg2-host=replica
+pg2-host=standby
 pg2-host-user=root
 pg2-path=/var/lib/postgresql/data
 pg2-port=5432
@@ -240,6 +240,14 @@ pgbackrest \
 
 ## **Architecture**
 ![PostgreSQL - pgBackRest - MinIO Infrastructure Design](./assets/architecture.svg)
+
+## **Restore Procedure**
+> In preparing for a restoration mechanism (i.e. disaster recovery), there are necessary steps to be followed.
+>> If a standby instance is available, promote the standby first before proceeding with the steps.
+- Shutdown the target instance's _PostgreSQL_.
+- Cleanup any residual files under the `$PGDATA` (e.g. `/var/lib/postgresql/data`) directory, or use `--delta` flag for restoring only overlapping files via checksums.
+- Execute the `pgbackrest restore` command and wait for it to finish, including all WAL files.
+- Start the _PostgreSQL_ instance and wait for it to accept connections.
 
 ## **References**
 - [pgBackRest Repository](https://github.com/pgbackrest/pgbackrest)

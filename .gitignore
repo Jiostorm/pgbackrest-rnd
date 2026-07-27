@@ -8,7 +8,7 @@ primary/data/*
 !primary/data/postgresql.conf
 !primary/data/pg_hba.conf
 
-replica/data/*
-!replica/pgbackrest/*
-!replica/data/postgresql.conf
-!replica/data/pg_hba.conf
+standby/data/*
+!standby/pgbackrest/*
+!standby/data/postgresql.conf
+!standby/data/pg_hba.conf
